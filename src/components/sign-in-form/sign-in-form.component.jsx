@@ -1,21 +1,19 @@
 import { useState } from "react";
 
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
+import { signInWithGooglePopup, createUserDocumentFromAuth, signInWithEmailAndPasswordHandle } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-import "./sign-up-form.styles.scss";
+import "./sign-in-form.styles.scss";
 
 const defaultFormValues = {
-    displayName: '',
     email: '',
     password: '',
-    confirmPassword: ''
 }
 
-const SignUpForm = () => {
+const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormValues);
-    const {displayName, email, password, confirmPassword} = formFields;
+    const {email, password} = formFields;
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -28,29 +26,34 @@ const SignUpForm = () => {
         event.preventDefault();
 
         try{
-            const user = await createAuthUserWithEmailAndPassword(email, password);
-            const userDocRef = await createUserDocumentFromAuth(user.user, {displayName});
-            setFormFields(defaultFormValues);
+            const userCredentials = await signInWithEmailAndPasswordHandle(email, password);
+            console.log(userCredentials);
         }catch(error){
             console.log("error creating user", error);
         }
         
     }
 
+    const logGoogleUser = async () =>{
+        const response = await signInWithGooglePopup();
+        const userDocRef = await createUserDocumentFromAuth(response.user);
+    };
+    /* */
+
     return (
-        <div className="sign-up-container">
-            <h2>Don't have an account?</h2>
-            <span>Sign up with your email and password</span>
+        <div className="sign-in-container">
+            <h2>Already have an account?</h2>
+            <span>Sign in with your email and password</span>
             <form onSubmit={handleSubmit}>
-                <FormInput label={"Display Name"} type="text" required name="displayName" value={displayName} onChange={handleChange} />
                 <FormInput label={"Email"} type="email" required name="email" value={email} onChange={handleChange} />
                 <FormInput label={"Password"} type="password" required name="password" value={password} onChange={handleChange} />
-                <FormInput label={"Confirm Password"} type="password" required name="confirmPassword" value={confirmPassword} onChange={handleChange} />
-                
+                <div className="buttons-container-sign-in-form">
                 <Button buttonType={""} type="submit">Submit</Button>
+                <Button buttonType={"google"} type="button" onClick={logGoogleUser}>Sign In with google</Button>
+                </div>
             </form>
         </div>
     );
 }
 
-export default SignUpForm;
+export default SignInForm;
