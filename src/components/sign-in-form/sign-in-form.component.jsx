@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import { signInWithGooglePopup, createUserDocumentFromAuth, signInWithEmailAndPasswordHandle } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import { UserContext } from "../../contexts/user.context";
 
 import "./sign-in-form.styles.scss";
 
@@ -26,8 +27,8 @@ const SignInForm = () => {
         event.preventDefault();
 
         try{
-            const userCredentials = await signInWithEmailAndPasswordHandle(email, password);
-            console.log(userCredentials);
+            await signInWithEmailAndPasswordHandle(email, password);
+            setFormFields(defaultFormValues);
         }catch(error){
             console.log("error creating user", error);
         }
@@ -35,10 +36,8 @@ const SignInForm = () => {
     }
 
     const logGoogleUser = async () =>{
-        const response = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(response.user);
+        await signInWithGooglePopup();
     };
-    /* */
 
     return (
         <div className="sign-in-container">
