@@ -22,14 +22,28 @@ const addItem = (items, productToAdd) => {
     }
 }
 
+const removeItem = (items, itemId) => {
+    const result = items.filter((item) => { return item.id != itemId;});
+    console.log("remove", result);
+    return result;
+}
+
+const decreaseQuantity = (items, itemId) => {
+    var target = items.find((cartItem) => {return cartItem.id == itemId});
+    target.quantity--;
+    if(target.quantity <= 0)
+        return removeItem(items, itemId);
+
+    return [...items];
+}
+
 export const CartProvider = ({children}) => {
     const [isVisible, setIsVisible] = useState(false);
     const [cartItems, setcartItems] = useState([]);
     const [cartItemCount, setCartItemCount] = useState(0);
 
     useEffect(() =>{
-        if(cartItems.length <= 0)
-            return;
+       
 
         const initialValue = 0;
         const sumWithInitial = cartItems.reduce(
@@ -42,8 +56,16 @@ export const CartProvider = ({children}) => {
     const addItemToCart = (productToAdd) => {
         setcartItems(addItem(cartItems, productToAdd));
     }
+
+    const decreaseQuantityOfCartItem = (itemId) => {
+        setcartItems(decreaseQuantity(cartItems, itemId));
+    }
+
+    const removeCartItem = (itemId) => {
+        setcartItems(removeItem(cartItems, itemId));
+    }
     
-    const value  = {isVisible, setIsVisible, cartItems, addItemToCart, cartItemCount};
+    const value  = {isVisible, setIsVisible, cartItems, addItemToCart, cartItemCount, decreaseQuantityOfCartItem, removeCartItem};
 
     return (
         <CartContext.Provider value={value}>{children}</CartContext.Provider>
