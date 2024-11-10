@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import ProductCard from "../../components/product-card/product-card.component";
 
-import "./category-preview.styles.scss";
+import { CategoryPreviewContainer, Title, Preview } from "./category-preview.styles";
 
 const CategoryPreview = ({title, products}) => {
     const navigate = useNavigate();
@@ -12,11 +12,11 @@ const CategoryPreview = ({title, products}) => {
     }
 
     return (
-        <div className="category-preview-container">
+        <CategoryPreviewContainer>
             <h2>
-                <span onClick={redirectToCategory} className="title">{title}</span>
+                <Title onClick={redirectToCategory}>{title}</Title>
             </h2>
-            <div className="preview">
+            <Preview>
                {
                 products.filter((_, index) => index < 4).map((product, index) => {
                     return (
@@ -24,8 +24,8 @@ const CategoryPreview = ({title, products}) => {
                     );
                 })
                }
-            </div>
-        </div>
+            </Preview>
+        </CategoryPreviewContainer>
     );
 }
 
