@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import {BackgroundImage, CategoryItemBodyContainer, CategoryItemContainer} from './category-item.styles.jsx';
+import React from 'react';
 
 const CategoryItem = ({category:{title, imageUrl}}) => {
     const navigate = useNavigate();
@@ -11,7 +12,9 @@ const CategoryItem = ({category:{title, imageUrl}}) => {
 
     return (
         <CategoryItemContainer>
-            <BackgroundImage imageurl={imageUrl} />
+            <BackgroundImage 
+// @ts-ignore
+            imageurl={imageUrl} />
             <CategoryItemBodyContainer onClick={redirectToCategory}>
                 <h2>{title}</h2>
                 <p>Shop now</p>

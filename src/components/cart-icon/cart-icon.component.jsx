@@ -1,18 +1,20 @@
 import { useContext } from "react";
-
-import { CartContext } from "../../contexts/cart.context";
-
-
 import {ShoppingBagIcon, CartIconContainer, ItemCount} from "./cart-icon.styles.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartCount, selectIsCartVisible } from "../../store/cart/cart.selector.js";
+import { setIsVisible } from "../../store/cart/cart.action.js";
+import React from "react";
 
 const CartIcon = () => {
-    const {isVisible, setIsVisible, cartItemCount} = useContext(CartContext);
+    const isVisible = useSelector(selectIsCartVisible);
+    const dispatch = useDispatch();
+    const cartItemCount = useSelector(selectCartCount);
 
     const toggleDropdown = () => {
         if(isVisible)
-            setIsVisible(false);
+            dispatch(setIsVisible(false));
         else
-            setIsVisible(true);
+            dispatch(setIsVisible(true));
     }
 
     return (

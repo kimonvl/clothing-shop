@@ -1,3 +1,4 @@
+import React from "react";
 import CategoriesContainer from "../../components/categories-container/categories-container.component";
 
 const Home = () => {

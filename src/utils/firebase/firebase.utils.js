@@ -43,13 +43,7 @@ export const db = getFirestore();
 export const getCategoriesMap = async () => {
   const querySnapshot = await getDocs(collection(db, 'categories'));
 
-  let map = {};
-
-  querySnapshot.forEach((doc) => {
-    map[doc.data().title] = doc.data().items;
-  });
-
-  return map;
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 }
 
 export const addCollectionAndDocuments = async (
