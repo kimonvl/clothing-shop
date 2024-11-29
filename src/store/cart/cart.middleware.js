@@ -45,6 +45,9 @@ const removeItem = (items, itemId) => {
 }
 
 export const cartMiddleware = (store) => (next) => (action) => {
+    if (!action.type)
+        return next(action);
+    
     const {type, payload} = action;
     const cartItems = store.getState().cart.cartItems;
     switch (type) {
