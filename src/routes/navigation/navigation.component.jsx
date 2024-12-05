@@ -6,17 +6,19 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 
 import {ReactComponent as Logo} from "../../assets/crown.svg";
 import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink} from "./navigation.styles.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector.js";
 import React from "react";
 import { selectIsCartVisible } from "../../store/cart/cart.selector.js";
+import { signOutStart } from "../../store/user/user.action.js";
 
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isVisible = useSelector(selectIsCartVisible);
+  const dispatch = useDispatch();
 
   const signOutHandler = async () =>{
-    await signOutUser();
+    dispatch(signOutStart());
   }
 
   return (

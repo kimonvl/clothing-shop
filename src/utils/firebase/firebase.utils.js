@@ -81,14 +81,27 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) 
       });
     } catch (error) {
       console.log("error saving  user", error.message);
-    }    
+    }
+    return await getDoc(userDocRef); 
   }
-
-  return userDocRef;
+  return userSnapshot;
 }
 
 export const onAuthStateChangedListener = (callback) =>{
   return onAuthStateChanged(auth, callback);
+}
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 }
 
 export const createAuthUserWithEmailAndPassword = async (email, passwrod) => {
