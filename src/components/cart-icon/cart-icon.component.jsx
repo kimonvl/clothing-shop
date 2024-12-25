@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import {ShoppingBagIcon, CartIconContainer, ItemCount} from "./cart-icon.styles.jsx";
+import {ShoppingBagIcon, CartIconContainer, ItemCount} from "./cart-icon.styles";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartCount, selectIsCartVisible } from "../../store/cart/cart.selector.js";
-import { setIsVisible } from "../../store/cart/cart.action.js";
+import { selectCartCount, selectIsCartVisible } from "../../store/cart/cart.selector";
+import { setIsVisible } from "../../store/cart/cart.action";
 import React from "react";
 
 const CartIcon = () => {

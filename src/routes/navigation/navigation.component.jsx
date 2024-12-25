@@ -5,12 +5,12 @@ import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
 import {ReactComponent as Logo} from "../../assets/crown.svg";
-import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink} from "./navigation.styles.jsx";
+import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink} from "./navigation.styles";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentUser } from "../../store/user/user.selector.js";
+import { selectCurrentUser } from "../../store/user/user.selector";
 import React from "react";
-import { selectIsCartVisible } from "../../store/cart/cart.selector.js";
-import { signOutStart } from "../../store/user/user.action.js";
+import { selectIsCartVisible } from "../../store/cart/cart.selector";
+import { signOutStart } from "../../store/user/user.action";
 
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);

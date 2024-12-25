@@ -1,7 +1,7 @@
 import React from "react";
-import CategoryItem from "../category-item/category-item.component.jsx";
+import CategoryItem from "../category-item/category-item.component";
 
-import { CategoriesContainerDiv } from "./categories-container.styles.jsx";
+import { CategoriesContainerDiv } from "./categories-container.styles";
 
 const CategoriesContainer = ({categories}) =>{
     return (

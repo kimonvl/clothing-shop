@@ -1,12 +1,13 @@
 import { applyMiddleware, compose, createStore } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { thunk } from "redux-thunk";
-import logger from "redux-logger";
 import { rootReducer } from "./root-reducer";
 import { cartMiddleware } from "./cart/cart.middleware";
 import { rootSaga } from "./root-saga";
 import createSagaMiddleware from "redux-saga";
+import logger from "redux-logger";
+
+export type RootState = ReturnType<typeof rootReducer>;
 
 const sagaMiddleware = createSagaMiddleware();
 
