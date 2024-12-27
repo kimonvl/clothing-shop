@@ -23,14 +23,3 @@ export const ItemCount = styled.span`
     bottom: 12px;
 `;
 
-/* {.cart-icon-container {
-    
-
-    .shopping-icon {
-        
-    }
-
-    .item-count {
-        
-    }
-}} */

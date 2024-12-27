@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
 
-import ProductCard from "../../components/product-card/product-card.component";
+import ProductCard from "../product-card/product-card.component";
 
 import { CategoryPreviewContainer, Title, Preview } from "./category-preview.styles";
+import { CategoryItem } from "../../store/categories/categories.types";
 
-const CategoryPreview = ({title, products}) => {
+export type CategoryPreviewProps = {
+    title: string;
+    products: CategoryItem[];
+}
+
+const CategoryPreview = ({title, products}: CategoryPreviewProps) => {
     const navigate = useNavigate();
     
     const redirectToCategory = () => {

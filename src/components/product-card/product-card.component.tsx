@@ -1,12 +1,15 @@
-import { useContext } from "react";
 import Button, {BUTTON_CLASSES} from "../button/button.component";
 
 import { ProductCardContainer, Footer, Name, Price } from "./product-card.styles";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/cart/cart.action";
-import React from "react";
+import { CategoryItem } from "../../store/categories/categories.types";
 
-const ProductCard  = ({product}) =>{
+export type ProductCardProps = {
+    product: CategoryItem;
+}
+
+const ProductCard  = ({product}: ProductCardProps) =>{
     const {name, price, imageUrl} = product;
     
     const dispatch = useDispatch();

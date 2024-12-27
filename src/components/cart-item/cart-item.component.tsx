@@ -1,6 +1,10 @@
 import { CarItemContainer, Name, ItemDetails } from "./cart-item.styles";
+import {CartItem as CartItemType} from "../../store/cart/cart.types";
+export type CartItemPorps = {
+    cartItem: CartItemType
+}
 
-const CartItem = ({cartItem}) => {
+const CartItem = ({cartItem}: CartItemPorps) => {
     return (
         <CarItemContainer>
             <img src={`${cartItem.imageUrl}`} alt={`${cartItem.name}`} />

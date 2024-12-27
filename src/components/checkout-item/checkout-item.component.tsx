@@ -1,10 +1,13 @@
-import { useContext } from "react"; 
 import { CheckoutItemContainer, ImageContainer, Name, Quantity, Arrow, Value, Price, RemoveButton } from "./checkout-item.styles";
 import { useDispatch } from "react-redux";
 import { decreaseQuantityOfItem, increaseQuantityOfItem, removeItemFromCart } from "../../store/cart/cart.action";
-import React from "react";
+import { CartItem } from "../../store/cart/cart.types";
 
- const CheckoutItem = ({item}) => {
+export type CheckoutItemProps = {
+    item: CartItem;
+}
+
+const CheckoutItem = ({item}: CheckoutItemProps) => {
     const {name, imageUrl, price, quantity} = item;
     const dispatch = useDispatch();
 
@@ -34,6 +37,6 @@ import React from "react";
             <RemoveButton onClick={removeItem}>&#10005;</RemoveButton>
         </CheckoutItemContainer>
     );
- }
+}
 
- export default CheckoutItem;
+export default CheckoutItem;

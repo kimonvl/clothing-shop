@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
+import { CategoryObj } from '../categories-container/categories-container.component';
 import {BackgroundImage, CategoryItemBodyContainer, CategoryItemContainer} from './category-item.styles';
-import React from 'react';
 
-const CategoryItem = ({category:{title, imageUrl}}) => {
+const CategoryItem = ({category}: {category: CategoryObj}) => {
     const navigate = useNavigate();
-    
+    const {title, imageUrl} = category;
     const redirectToCategory = () => {
         navigate(`/shop/${title}`);
     }
@@ -13,7 +13,6 @@ const CategoryItem = ({category:{title, imageUrl}}) => {
     return (
         <CategoryItemContainer>
             <BackgroundImage 
-// @ts-ignore
             imageurl={imageUrl} />
             <CategoryItemBodyContainer onClick={redirectToCategory}>
                 <h2>{title}</h2>
